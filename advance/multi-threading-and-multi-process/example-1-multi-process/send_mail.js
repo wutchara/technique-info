@@ -14,4 +14,3 @@ process.on('message', async (message) => {
         counter: numberOfMailsSend
     });
 });
-//loadtest http://127.0.0.1:3000/endpoint -c 5 -n 10
