@@ -1,2 +1,4 @@
 /advance/multi-threading-and-multi-process/example-1-multi-process/node_modules/*
 /advance/multi-threading-and-multi-process/example-1-multi-process/package-lock.json
+advance/cluster-module/example-2/node_modules
+advance/cluster-module/example-2/package-lock.json
