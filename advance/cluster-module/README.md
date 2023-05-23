@@ -87,9 +87,54 @@ console output
 ## Performance test
 ---
 
+## summary (6 cores)
+> Mean latency is (the average time it took to complete a single request)
 
+|mode| loop |RPS|Mean latency|%RPS|%latency|
+|----|----|----|----|----|----|
+|non-cluster|200,000|1767|56 ms||
+|cluster|200,000|2201|44.9 ms|+24.56%|-19.82%|
+|non-cluster|500,000|1130|87.8 ms|||
+|cluster|500,000|2203|44.7 ms|+94.96%|-49.09%|
+|**non-cluster***|100|2845|34.7 ms|||
+|**cluster***|100|2850|34.7 ms|+0.18%|0%|
 
+<br />
 
+![ex-2-c-1](./images/ex2/cluster-01.PNG)
+
+---
+<br />
+
+## concurrent: 100; total request: 10,000; loop: 200,000
+```bash
+loadtest http://localhost:XXXX/api/200000 -n 1000 -c 100
+```
+
+![ex-2-c-1](./images/ex2/perf-non-cluster-01.PNG)
+![ex-2-nc-1](./images/ex2/perf-cluster-01.PNG)
+
+<br />
+
+## concurrent: 100; total request: 10,000; loop: 500,000
+```bash
+loadtest http://localhost:XXXX/api/500000 -n 1000 -c 100
+```
+
+![ex-2-c-2](./images/ex2/perf-non-cluster-02.PNG)
+![ex-2-nc-2](./images/ex2/perf-cluster-02.PNG)
+
+<br />
+
+## concurrent: 100; total request: 10,000; loop: 100
+```bash
+loadtest http://localhost:XXXX/api/100 -n 1000 -c 100
+```
+
+![ex-2-c-3](./images/ex2/perf-non-cluster-03.PNG)
+![ex-2-nc-3](./images/ex2/perf-cluster-03.PNG)
+
+<br />
 
 
 ---
