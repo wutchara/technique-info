@@ -1,6 +1,9 @@
 # Encoding (1 way encoding)
 > Encoding is the process of putting a sequence of characters into a specialized format for efficient transmission or storage
 
+- [Probability in Hashing](https://courses.cs.duke.edu/cps102/spring09/Lectures/L-18.pdf)
+- [Hash Collision Probabilities](https://preshing.com/20110504/hash-collision-probabilities/)
+
 <br />
 
 ![hash-2](./images/hash-2.png)
@@ -19,7 +22,51 @@
 
 ![hash-1](./images/hash-1.webp)
 
+![sha256-1](./images/sha256.png)
 
+<br />
+
+## hash algorithm
+- MD5 (message-digest algorithm) => MD5 hash code strings are limited to 128 bits
+- SHA-256 (Secure Hash Algorithms) => The secure hash algorithm with a digest size of 256 bits
+
+### MD5
+
+```javascript
+const md5 = require("md5");
+const strArr = ['ham', 'ham-', 'ham-1'];
+
+strArr.forEach(str => {
+    const hashStr = md5(str);
+    console.log(`hashed string is: '${hashStr}', string: '${str}'`);
+});
+```
+![md5-1](./images/md5.PNG)
+
+
+### SHA-256
+
+```javascript
+const crypto = require("crypto");
+const algorithm = "sha256";
+var salts = ["ham-test", "ham-test2"];
+console.log(`algorithm: ${algorithm}`);
+
+const strArr = ['ham', 'ham-', 'ham-1'];
+
+salts.forEach(salt => {
+    console.log(`salt: ${salt}`);
+    strArr.forEach(str => {
+        const hash = crypto.createHmac(algorithm, salt);
+        hash.update(str)
+        const myHash = hash.digest('hex');
+        console.log(`hashed string is: '${myHash}', string: '${str}'`);
+    });
+    console.log('===========');
+});
+```
+
+![sha-256-1](./images/sha256-1.PNG)
 
 ---
 
@@ -37,7 +84,10 @@
 ## Symmetric Key
 
 - Triple DES(Data Encryption Standard)
-- AES (Advanced Encryption Standard)
+- AES (Advanced Encryption Standard) => [Modes](https://www.highgo.ca/2019/08/08/the-difference-in-five-modes-in-the-aes-encryption-algorithm/)
+  - [aes-128-cbc](https://stackoverflow.com/questions/33121619/is-there-any-difference-between-aes-128-cbc-and-aes-128-encryption) 
+  - [Key vs IV](https://stackoverflow.com/questions/9049789/aes-encryption-key-versus-iv)
+    - IV should be unique
 
 ![sym-1](./images/encription.png)
 
@@ -46,7 +96,7 @@
 
 - RSA
 
-![asym-1](./images/asymmetric.avif)
+![asym-1](./images/asymmetric.png)
 
 REF:
 - https://bigdata.go.th/big-data-101/encoding-and-encryption-for-developers/
