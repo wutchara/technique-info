@@ -136,12 +136,15 @@ messages.forEach(message => {
 
 ![asym-1](./images/aes.PNG)
 
+<br />
 
 ## Asymmetric Key
 
 - RSA
 
 ![asym-1](./images/asymmetric.png)
+
+<br />
 
 REF:
 - https://bigdata.go.th/big-data-101/encoding-and-encryption-for-developers/
