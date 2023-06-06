@@ -37,3 +37,5 @@
 ### REF
 - https://www.simplilearn.com/image-processing-article
 - https://medium.com/@abdullah1621997/which-programming-language-to-use-for-image-processing-864d0110e695
+- https://www.analyticsvidhya.com/blog/2014/12/image-processing-python-basics/
+- https://realpython.com/image-processing-with-the-python-pillow-library/
