@@ -4,3 +4,5 @@ advance/cluster-module/example-2/node_modules
 advance/cluster-module/example-2/package-lock.json
 /basic/Encryption/code/node_modules/*
 /basic/Encryption/code/package-lock.json
+/advance/docker-networks/nodejs-service*/node_modules/*
+package-lock.json
