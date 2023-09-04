@@ -26,3 +26,5 @@ Progressive Web Applications (PWAs) are apps built with web technologies but the
 ## Ref
 - https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
 - https://www.freecodecamp.org/news/what-are-progressive-web-apps/
+- https://dev.to/developertharun/the-service-worker-lifecycle-for-newbies-progressive-web-apps-4b51
+
