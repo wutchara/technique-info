@@ -1,6 +1,10 @@
 # GitLab CI/CD
 
-ref: https://lseg.udemy.com/course/gitlab-ci-pipelines-ci-cd-and-devops-for-beginners/learn/
+course: https://lseg.udemy.com/course/gitlab-ci-pipelines-ci-cd-and-devops-for-beginners/learn/
+
+Repo: https://gitlab.com/wutchara/ci-cd
+
+<br />
 
 ## Pipeline
 - Create repository
@@ -71,7 +75,7 @@ test:
 
 ---
 
-< br />
+<br />
 
 ## My GitLab CI pipeline is not running
 
