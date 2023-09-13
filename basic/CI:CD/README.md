@@ -4,6 +4,9 @@ course: https://lseg.udemy.com/course/gitlab-ci-pipelines-ci-cd-and-devops-for-b
 
 Repo: https://gitlab.com/wutchara/ci-cd
 
+Tools: https://gitlab.com/gitlab-course-public/my-static-website-no-pipeline
+
+
 <br />
 
 ## Pipeline
