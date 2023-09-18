@@ -98,6 +98,8 @@ test:
 
 ## Deploy static website
 
+Example: https://gitlab.com/wutchara/test-gatsby-cicd/-/blob/main/README-deploy.md?ref_type=heads
+
 Deployment: https://surge.sh/help/getting-started-with-surge
 
 url: http://delirious-writing.surge.sh/
