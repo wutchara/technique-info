@@ -89,3 +89,65 @@ test:
 - the pipeline file is in the root of the project and not inside a directory
 
 - Auto DevOps is NOT enabled
+
+---
+
+---
+
+<br />
+
+## Deploy static website
+
+Deployment: https://surge.sh/help/getting-started-with-surge
+
+url: http://delirious-writing.surge.sh/
+
+domain: https://www.dotomator.com/web20.html
+
+### Test pipeline after service has deployed
+
+```
+image: node:18.17.1-bullseye
+
+stages:
+  - build
+  - test
+
+build website:
+  stage: build
+  script:
+    - cd my-gatsby-site
+    - npm install
+    - npm install -g gatsby-cli
+    - gatsby build
+  artifacts:
+    paths:
+      - ./my-gatsby-site/public
+
+# Parallel
+test artifact:
+  stage: test
+  image: alpine
+  script:
+    - grep "Gatsby" ./my-gatsby-site/public/index.html
+    # - grep "XXXXXXXX" ./my-gatsby-site/public/index.html
+    - grep "HAM - TEST" ./my-gatsby-site/public/index.html
+
+# Parallel
+test website:
+  stage: test
+  script:
+    - ls
+    - cd my-gatsby-site
+    - ls
+    - npm install
+    - npm install -g gatsby-cli
+    - gatsby build
+    # '&' to run job in background
+    - gatsby serve &
+    # Waiting for job has started
+    - sleep 3
+    - curl "http://localhost:9000" | tac | tac | grep -q "Gatsby"
+```
+
+
