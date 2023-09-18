@@ -152,4 +152,73 @@ test website:
     - curl "http://localhost:9000" | tac | tac | grep -q "Gatsby"
 ```
 
+## Deploy static website via pipeline
+
+- add variable SURGE_LOGIN: xxx@gmail.com
+- add variable SURGE_TOKEN: xxxxxx
+- generate domain via 'https://www.dotomator.com/web20.html'
+- add stage deploy
+
+```
+image: node:18.17.1-bullseye
+
+stages:
+  - build
+  - test
+  - deploy
+
+build website:
+  stage: build
+  script:
+    - cd my-gatsby-site
+    - npm install
+    - npm install -g gatsby-cli
+    - gatsby build
+  artifacts:
+    paths:
+      - ./my-gatsby-site/public
+
+# Parallel
+test artifact:
+  stage: test
+  image: alpine
+  script:
+    - grep "Gatsby" ./my-gatsby-site/public/index.html
+    # - grep "XXXXXXXX" ./my-gatsby-site/public/index.html
+    - grep "HAM - TEST" ./my-gatsby-site/public/index.html
+
+# Parallel
+test website:
+  stage: test
+  script:
+    - ls
+    - cd my-gatsby-site
+    - ls
+    - npm install
+    - npm install -g gatsby-cli
+    - gatsby build
+    # '&' to run job in background
+    - gatsby serve &
+    # Waiting for job has started
+    - sleep 3
+    - curl "http://localhost:9000" | tac | tac | grep -q "Gatsby"
+
+deploy to surge:
+  stage: deploy
+  script:
+    - ls
+    - cd my-gatsby-site
+    - ls
+    - npm i -g surge
+    # 'fivecast' is domain that I use 'https://www.dotomator.com/web20.html' to generate
+    - surge --project ./public --domain fivecast.surge.sh
+
+```
+
+<br />
+
+<br />
+
+
+
 
