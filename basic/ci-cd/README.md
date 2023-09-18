@@ -224,71 +224,56 @@ deploy to surge:
 <br />
 
 ## Pre-Definded Environment variable and replace string
+ref: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
 ```
-image: node:18.17.1-bullseye
+image: node:10
 
 stages:
   - build
   - test
   - deploy
+  - deployment tests
 
 build website:
   stage: build
   script:
-    - cd my-gatsby-site
-    # '$CI_COMMIT_SHORT_SHA' is pre-defined environment variable
     - echo $CI_COMMIT_SHORT_SHA
     - npm install
     - npm install -g gatsby-cli
     - gatsby build
-
-    # sed - stream editor
-    # will replace '%%VERSION%%' with '$CI_COMMIT_SHORT_SHA'
-    #
-    # sed -i 's/word1/word2/g' input-file
-    # -i for edit in place
-    # s for substitute
-    # g for global replacement
     - sed -i "s/%%VERSION%%/$CI_COMMIT_SHORT_SHA/" ./public/index.html
   artifacts:
     paths:
-      - ./my-gatsby-site/public
+      - ./public
 
-# Parallel
 test artifact:
-  stage: test
   image: alpine
+  stage: test
   script:
-    - grep "Gatsby" ./my-gatsby-site/public/index.html
-    # - grep "XXXXXXXX" ./my-gatsby-site/public/index.html
-    - grep "HAM - TEST" ./my-gatsby-site/public/index.html
+    - grep -q "Gatsby" ./public/index.html
 
-# Parallel
 test website:
   stage: test
   script:
-    - ls
-    - cd my-gatsby-site
-    - ls
     - npm install
     - npm install -g gatsby-cli
-    - gatsby build
-    # '&' to run job in background
     - gatsby serve &
-    # Waiting for job has started
     - sleep 3
     - curl "http://localhost:9000" | tac | tac | grep -q "Gatsby"
 
-deploy to surge:
+deploy to surge: 
   stage: deploy
   script:
-    - ls
-    - cd my-gatsby-site
-    - ls
-    - npm i -g surge
-    # 'delirious-writing' is domain that I use 'https://www.dotomator.com/web20.html' to generate
-    - surge --project ./public --domain "delirious-writing.surge.sh"
+    - npm install --global surge
+    - surge --project ./public --domain instazone.surge.sh
 
+test deployment:
+  image: alpine
+  stage: deployment tests
+  script:
+    - apk add --no-cache curl
+    - curl -s "https://instazone.surge.sh" | grep -q "Hi people"
+    - curl -s "https://instazone.surge.sh" | grep -q "$CI_COMMIT_SHORT_SHA"
 ```
 ---
 
