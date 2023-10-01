@@ -34,8 +34,39 @@
 
 <br />
 
+## Image processing algorithms
+
+### Morphological Image Processing
+> Morphological image processing tries to remove the imperfections from the binary images because binary regions produced by simple thresholding can be distorted by noise. It also helps in smoothing the image using opening and closing operations.
+
+- **dilation** operation adds pixels to the boundaries of the object in an image
+
+- **erosion** operation removes the pixels from the object boundaries. 
+
+
+### Gaussian Image Processing
+> Gaussian blur which is also known as gaussian smoothing, is the result of blurring an image by a Gaussian function.
+
+
+### Fourier Transform
+> Fourier transform breaks down an image into sine and cosine components. 
+
+### Edge Detection
+> Edge detection is an image processing technique for finding the boundaries of objects within images. It works by detecting discontinuities in brightness.
+
+- https://medium.com/swlh/introduction-to-image-processing-part-4-object-detection-619e2558d1f2
+
+
+### Wavelet Image
+> We saw a Fourier transform but it is only limited to the frequency. Wavelets take both time and frequency into the consideration. This transform is apt for non-stationary signals. 
+
+<br />
+
+<br />
+
 ### REF
 - https://www.simplilearn.com/image-processing-article
 - https://medium.com/@abdullah1621997/which-programming-language-to-use-for-image-processing-864d0110e695
 - https://www.analyticsvidhya.com/blog/2014/12/image-processing-python-basics/
 - https://realpython.com/image-processing-with-the-python-pillow-library/
+- https://neptune.ai/blog/image-processing-python

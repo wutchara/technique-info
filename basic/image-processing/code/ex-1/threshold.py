@@ -17,13 +17,13 @@ img_cat_threshold = img_cat_gray.point(
 )
 # img_cat_threshold.show()
 
-
+# erosion operation removes the pixels from the object boundaries. 
 def erode(cycles, image):
     for _ in range(cycles):
         image = image.filter(ImageFilter.MinFilter(3))
     return image
 
-
+# dilation operation adds pixels to the boundaries of the object in an image
 def dilate(cycles, image):
     for _ in range(cycles):
         image = image.filter(ImageFilter.MaxFilter(3))
