@@ -31,6 +31,12 @@
 - Java
 - C or C++
 
+<br />
+
+# Install
+```
+python3 -m pip install Pillow
+```
 
 <br />
 

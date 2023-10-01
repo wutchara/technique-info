@@ -12,8 +12,8 @@ gray_img.show()
 # grayscale
 print('img.getbands()', img.getbands())
 # img.show()
-cmyk_img.getbands()
-gray_img.getbands()
+print('cmyk_img.getbands()', cmyk_img.getbands())
+print('gray_img.getbands()', gray_img.getbands())
 
 
 red, green, blue = img.split()
