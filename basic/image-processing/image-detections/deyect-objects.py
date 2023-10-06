@@ -22,11 +22,11 @@ def showImage(img, grayscale=False):
 original_image = imread('candies.jpeg')
 showImage(original_image)
 
-im = rgb2gray(original_image) # grayscale image
-showImage(im, True)
+image_gray = rgb2gray(original_image) # grayscale image
+showImage(image_gray, True)
 
 
-im_bw = im < 0.5 # finding the appropriate threshold to binarize our image
+im_bw = image_gray < 0.55 # finding the appropriate threshold to binarize our image
 showImage(im_bw, True)
 # print(im_bw)
 
@@ -58,38 +58,57 @@ showImage(im_cleaned, True)
 
 # =========================
 # Detect objects
+# Compute radii in the 3rd column.
 # =========================
+# 
+blobs_log = blob_log(im_cleaned, max_sigma=30, num_sigma=10, threshold=.1)
+blobs_log[:, 2] = blobs_log[:, 2] * sqrt(2)
 
-# # LoG => Laplacian of Gaussian
-# blobs_log = blob_log(im_bw, max_sigma=30, num_sigma=10, threshold=.1)
-# blobs_log[:, 2] = blobs_log[:, 2] * sqrt(2)# Compute radii in the 3rd column.
-# showImage(blobs_log)
+blobs_dog = blob_dog(im_cleaned, max_sigma=30, threshold=.1)
+blobs_dog[:, 2] = blobs_dog[:, 2] * sqrt(2)
 
-# # DoG => Difference of Gaussian
-# blobs_dog = blob_dog(im_bw, max_sigma=30, threshold=.1)
-# blobs_dog[:, 2] = blobs_dog[:, 2] * sqrt(2)
-# showImage(blobs_dog)
+blobs_doh = blob_doh(im_cleaned, max_sigma=30, threshold=.01)
 
-# # DoH => Determinant of Hessian
-# blobs_doh = blob_doh(im_bw, max_sigma=30, threshold=.01)
-# showImage(blobs_doh)
+blobs_list = [blobs_log, blobs_dog, blobs_doh]
+colors = ['yellow', 'lime', 'red']
+titles = ['Laplacian of Gaussian', 'Difference of Gaussian',
+          'Determinant of Hessian']
+sequence = zip(blobs_list, colors, titles)
+
+fig, axes = plt.subplots(1, 3, figsize=(9, 3), sharex=True, sharey=True)
+ax = axes.ravel()
+
+for idx, (blobs, color, title) in enumerate(sequence):
+    ax[idx].set_title(title)
+    ax[idx].imshow(im_cleaned)
+    for blob in blobs:
+        y, x, r = blob
+        c = plt.Circle((x, y), r, color=color, linewidth=2, fill=False)
+        ax[idx].add_patch(c)
+    ax[idx].set_axis_off()
+
+plt.tight_layout()
+plt.show()
 
 # =========================
 # Connect components
 # =========================
-img_label = label(im_cleaned) # label objects
-regions = regionprops(img_label) # get region properties
+def showImageDetected(img):
+	img_label = label(img) # label objects
+	regions = regionprops(img_label) # get region properties
 
-plt.figure(figsize=(12,5))
+	plt.figure(figsize=(12,5))
 
-# create bounding box
-for props in regions:
-    minr, minc, maxr, maxc = props.bbox
-    bx = (minc, maxc, maxc, minc, minc)
-    by = (minr, minr, maxr, maxr, minr)
-    plt.plot(bx, by, '-r', linewidth=0.5)
+	# create bounding box
+	for props in regions:
+	    minr, minc, maxr, maxc = props.bbox
+	    bx = (minc, maxc, maxc, minc, minc)
+	    by = (minr, minr, maxr, maxr, minr)
+	    plt.plot(bx, by, '-r', linewidth=0.5)
 
-plt.imshow(img_label)
-plt.axis('off')
-plt.title('Detected Objects\nCount: {}'.format(len(regions)))
-showImage(img_label)
+	plt.imshow(img_label)
+	plt.axis('off')
+	plt.title('Detected Objects\nCount: {}'.format(len(regions)))
+	showImage(img_label)
+
+showImageDetected(im_cleaned)
