@@ -9,5 +9,7 @@ python -m pip install -U scikit-image
 python3 -m pip install -U matplotlib
 ```
 
+LIB: https://scikit-image.org/docs/stable/user_guide/install.html
+
 # REF:
 - https://medium.com/swlh/introduction-to-image-processing-part-4-object-detection-619e2558d1f2
