@@ -76,3 +76,4 @@ python3 -m pip install Pillow
 - https://www.analyticsvidhya.com/blog/2014/12/image-processing-python-basics/
 - https://realpython.com/image-processing-with-the-python-pillow-library/
 - https://neptune.ai/blog/image-processing-python
+- https://www.geeksforgeeks.org/object-detection-vs-object-recognition-vs-image-segmentation/
