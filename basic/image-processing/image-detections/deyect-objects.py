@@ -8,8 +8,11 @@ from math import sqrt
 from skimage.measure import label, regionprops
 
 
-def showImage(img):
-	plt.imshow(img)
+def showImage(img, grayscale=False):
+	if grayscale:
+		plt.imshow(img, cmap="gray")
+	else:
+		plt.imshow(img)
 	plt.show()
 
 # =========================
@@ -20,10 +23,11 @@ original_image = imread('candies.jpeg')
 showImage(original_image)
 
 im = rgb2gray(original_image) # grayscale image
-showImage(im)
+showImage(im, True)
+
 
 im_bw = im < 0.5 # finding the appropriate threshold to binarize our image
-showImage(im_bw)
+showImage(im_bw, True)
 # print(im_bw)
 
 # =========================
@@ -50,7 +54,7 @@ im_cleaned = dilate(im_bw, 5)
 im_cleaned = area_close(im_cleaned, 40)
 # showImage(im_cleaned)
 im_cleaned = median_filter(im_cleaned, size=21)
-showImage(im_cleaned)
+showImage(im_cleaned, True)
 
 # =========================
 # Detect objects
