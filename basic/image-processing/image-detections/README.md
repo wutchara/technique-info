@@ -6,6 +6,7 @@
 python -m pip install -U pip
 # Install scikit-image
 python -m pip install -U scikit-image
+python3 -m pip install -U matplotlib
 ```
 
 # REF:
