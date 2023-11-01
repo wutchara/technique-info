@@ -40,3 +40,4 @@ A design pattern is a general, reusable solution to a commonly occurring problem
 
 - https://blog.risingstack.com/fundamental-node-js-design-patterns/
 - https://blog.javascripttoday.com/blog/4-design-patterns-in-node/
+- https://refactoring.guru/design-patterns
