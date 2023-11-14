@@ -2,9 +2,15 @@
 
 ## Example libaries
 - cesium
+  - https://github.com/CesiumGS/cesium
+- aframe
+  - https://github.com/aframevr/aframe
 - babylon
+  - https://www.babylonjs.com/featureDemos
 - three.js
+  - https://github.com/mrdoob/three.js/
 - Vanta.js
+  - https://www.vantajs.com/
 
 
 ## REF
